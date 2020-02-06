@@ -1,0 +1,21 @@
+{
+    "name": "Corona Virus Map",
+    "version": "1.0",
+    "description": "Corona Virus Map",
+    "browser_action": {
+        "default_popup": "index.html"
+    },
+    "icons": {
+        "16": "China.png",
+        "48": "China.png",
+        "128": "China.png"
+    },
+    "manifest_version": 2,
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+C"
+            }
+        }
+    }
+}

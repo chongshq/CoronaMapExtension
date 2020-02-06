@@ -1,0 +1,13 @@
+#map {
+    width: 500px;
+    height: 500px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#report {
+    margin-left: 10px;
+    margin-right: 10px;
+    visibility: hidden;
+    font-size: 13px;
+}
