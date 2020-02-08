@@ -38,17 +38,26 @@ var provincesMap = {
     '澳门': 'aomen'
 }
 
+var apiUrl = "https://tianqiapi.com/api?version=epidemic&appid=33942674&appsecret=3p2x4bUj"
+
 var date_g;
 var dt;
 
 window.onload = function() {
-    this.fetch("http://www.tianqiapi.com/api?version=epidemic&appid=23035354&appsecret=8YvlPNrz").then(function(res) {
+    this.fetch(apiUrl).then(function(res) {
         res.json().then(function(json) {
+            console.log(json)
             document.getElementById("loading").style.display = "none";
             document.getElementById("report").style.visibility = "visible";
-            document.getElementById("report").innerText = "Total diagnosed: " + json.data.diagnosed + ", suspect: " + json.data.suspect + ", death: " + json.data.death + ", cured: " + json.data.cured;
-            let { date, area } = json.data
-            console.log(json.data)
+            var data;
+            if (json.errcode == null || json.errcode == 100) {
+                data = JSON.parse(window.localStorage.getItem("virus_latest"))
+            } else {
+                data = json.data
+                window.localStorage.setItem("virus_latest", JSON.stringify(data))
+            }
+            document.getElementById("report").innerText = "Total diagnosed: " + data.diagnosed + ", suspect: " + data.suspect + ", death: " + data.death + ", cured: " + data.cured;
+            let { date, area } = data
             date_g = date
             render(initDataCountry(area), "china")
         })
@@ -133,7 +142,6 @@ function render(data, mapName) {
             showDelay: 0,
             transitionDuration: 0.1,
             formatter: function(params) {
-                console.log(params)
                 return params.name + " diagnosed: " + params.value + " cured: " + params.data.curedCount + " dead: " + params.data.deadCount
             }
         }
