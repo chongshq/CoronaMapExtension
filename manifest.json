@@ -18,9 +18,17 @@
             }
         }
     },
-    "permissions": ["alarms", "notifications"],
+    "permissions": [
+        "alarms",
+        "notifications"
+    ],
     "background": {
-        "scripts": ["background.js"],
+        "scripts": [
+            "utils.js",
+            "constants.js",
+            "news.js",
+            "background.js"
+        ],
         "persistent": false
     }
 }
